@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavbarComponent from './NavbarComponent';
 import GallaryComponent from './GallaryComponent';
-import { Container} from "reactstrap"
+import { Container , Row, Col} from "reactstrap"
 
 
 class MainComponent extends Component {
@@ -9,7 +9,10 @@ class MainComponent extends Component {
         return (
             <Container>
                 <NavbarComponent/>
+               
                 <GallaryComponent/>
+                
+            
              </Container>
         );
     }
