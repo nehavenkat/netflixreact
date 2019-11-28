@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Input, Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Input } from 'reactstrap';
+import MovieComponent from './MovieComponent';
 
 
 class GallaryComponent extends Component {
     state = {
         search: "",
-        selectedBook: undefined,
+        selectedmovie: undefined,
         movies: [], //please define empty object props
         trending: [] ,
         watching: [],
-        releasing:[]   
+        releasing:[]
     }
 
 
@@ -41,61 +42,75 @@ class GallaryComponent extends Component {
 
 
     render() {
+        
         //you need to get it from the state
-        const trendingNow = this.state.trending.map(movie1 => {
+        const trendingNow = this.state.trending.map(movie => {
             return (
-            
-                        <Col md="2">
-                            <div>
-                                <img className="poster1" src={movie1.Poster} alt="" height="90" width="90" />
-                            </div>
-                            <div className="title1">
-                                {movie1.Title}
-                                {movie1.Year}
-                            </div>
-                        </Col>
-            )
-        });
+                <MovieComponent movie={movie}></MovieComponent>
+                       
+            )}
+        );
 
-        const watchingNow = this.state.watching.map(movie2 => {
+        const watchingNow = this.state.watching.map(movie => {
             return (
-                
-                        <Col md="2">
-                            <div>
-                                <img className="poster2" src={movie2.Poster} alt="" height="90" width="90" />
-                            </div>
-                            <div className="title2">
-                                {movie2.Title}
-                            </div>
-                        </Col>
-                  )
-        });
+                <MovieComponent movie={movie}></MovieComponent>
+            )});
 
-        const releasingNow = this.state.releasing.map(movie3 => {
+        const releasingNow = this.state.releasing.map(movie => {
             return (
-                
-                        <Col md="2">
-                            <div>
-                                <img className="poster3" src={movie3.Poster} alt="" height="90" width="90" />
-                            </div>
-                            <div className="title3">
-                                {movie3.Title}
-                            </div>
-                        </Col>
+                <MovieComponent movie={movie}></MovieComponent>
                 )
         });
 
 
+        const filteredTMovies = this.state.trending.filter(movie => movie.Title.toLowerCase().includes(this.state.search.toLowerCase()))
+        console.log(filteredTMovies);
+        const filteredWMovies = this.state.watching.filter(movie => movie.Title.toLowerCase().includes(this.state.search.toLowerCase()))
+        console.log(filteredWMovies);
+        const filteredRMovies = this.state.releasing.filter(movie => movie.Title.toLowerCase().includes(this.state.search.toLowerCase()))
+        console.log(filteredRMovies);
+        let filteredTrending = null;
+        let filteredWatching = null;
+        let filteredReleasing = null; 
+
+        if (filteredTMovies){
+        filteredTrending = filteredTMovies.map(movie => {
+            return (
+                <MovieComponent movie={movie}></MovieComponent>
+            )
+        });
+    }
+    if(filteredWMovies){
+        filteredWatching = filteredWMovies.map(movie => {
+            return (
+                
+                <MovieComponent movie={movie}></MovieComponent>
+                  )
+        });
+    }
+    
+    if(filteredRMovies){
+        filteredReleasing = filteredRMovies.map(movie => {
+            return (
+                
+                <MovieComponent movie={movie}></MovieComponent>
+                )
+        });
+
+    }
+
+
+
         return (
             <div>
-                <h1 className="my-5">Movies
-            <Input type="text" value={this.state.search} onChange={(val) => this.setState({ search: val.target.value.toLowerCase() })} placeholder="Type to search"></Input>
-                </h1>
                 <Container>
+                <Input type="text" value={this.state.search} onChange={(val) => this.setState({ search: val.target.value.toLowerCase() })} placeholder="Type to search"></Input>
+                
                 <h6>Trending Now</h6>
                 <Row>
                         {/* you need to insert the cosnt that you created before */}
-                        {trendingNow}
+                        {filteredTrending? filteredTrending :trendingNow }
+
 
                 </Row>
 
@@ -103,20 +118,20 @@ class GallaryComponent extends Component {
                 <Row>
                     
                         {/* you need to insert the cosnt that you created before */}
-                        {watchingNow}
+                        {filteredWatching? filteredWatching : watchingNow}
                 
                 </Row>
                 <h6>New Releases</h6>
                 <Row>
                     
                         {/* you need to insert the cosnt that you created before */}
-                        {releasingNow}
+                        {filteredReleasing? filteredReleasing : releasingNow}
                     
                 </Row>
             </Container>
             </div>            
 
-        );
+        )
     }
 }
 export default GallaryComponent;
