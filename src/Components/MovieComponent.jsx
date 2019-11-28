@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Input } from 'reactstrap';
+import { Col} from 'reactstrap';
 
 class MovieComponent extends Component {
     render() {

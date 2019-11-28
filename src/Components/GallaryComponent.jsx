@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Input } from 'reactstrap';
+import { Container, Row, Input } from 'reactstrap';
 import MovieComponent from './MovieComponent';
 
 

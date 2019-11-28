@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Row} from "reactstrap";
 import NavbarComponent from './NavbarComponent';
 import CommentComponent from './CommentComponent';
 
@@ -27,7 +26,8 @@ class MovieDetails extends Component {
             
             <img src={this.state.movie.Poster}></img>
             </div>
-            <div>
+            <div className={'container-flex col-5'}>
+
             <CommentComponent />
             </div>
             </>
