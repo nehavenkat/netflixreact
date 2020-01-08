@@ -28,7 +28,8 @@ class MovieDetails extends Component {
             </div>
             <div className={'container-flex col-5'}>
 
-            <CommentComponent />
+            <CommentComponent  elementId={this.props.match.params.movieId} />
+            
             </div>
             </>
         );

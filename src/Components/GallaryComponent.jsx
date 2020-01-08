@@ -15,10 +15,10 @@ class GallaryComponent extends Component {
 
 
     componentDidMount = async () => {
-        let response1 = await fetch("http://www.omdbapi.com/?apikey=80be0124&s=harry%20potter")
+        let response1 = await fetch("http://netflix-backend-neha.herokuapp.com/movies")
 
         let trending = await response1.json();
-        this.setState({ trending: trending.Search });
+        this.setState({ trending: trending });
         //this.setState({ movies: releasing.Search });
         console.log(trending);
     
